@@ -15,10 +15,9 @@ protocol MemberFetchable {
 final class MemeberViewModel {
     
     // MARK: - Variables
-    private static let memberUrlString = "https://randomuser.me/api/?results=20"
     private var memberResponse: MemberResponse?
-    
     let dataSource: MemberFetchable
+    
     init(_ dataSource: MemberFetchable) {
         self.dataSource = dataSource
     }

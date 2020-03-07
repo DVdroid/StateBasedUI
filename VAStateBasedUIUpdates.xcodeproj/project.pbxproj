@@ -71,21 +71,77 @@
 			isa = PBXGroup;
 			children = (
 				D6126F9C2412D2F400BFE8E3 /* AppDelegate.swift */,
-				D6126FA02412D2F400BFE8E3 /* RootViewController.swift */,
-				D6126FA22412D2F400BFE8E3 /* Main.storyboard */,
-				D6126FB02412D34F00BFE8E3 /* Utility.swift */,
-				D6126FB22412D35C00BFE8E3 /* NoConnectionView.swift */,
-				D6126FB32412D35C00BFE8E3 /* SpinnerView.swift */,
-				D6126FB82412D82B00BFE8E3 /* NetworkWrapper.swift */,
-				D6126FBC2412DA2500BFE8E3 /* MemeberViewModel.swift */,
-				D6126FBA2412D9E000BFE8E3 /* Members.swift */,
+				D6126FC42414018500BFE8E3 /* ViewControllers */,
+				D6126FC12414012C00BFE8E3 /* Views */,
+				D6126FC22414015F00BFE8E3 /* View Model */,
+				D6126FC52414019700BFE8E3 /* Network Layer */,
+				D6126FC32414017300BFE8E3 /* Model */,
+				D6126FC6241401D500BFE8E3 /* Helpers */,
+				D6126FC7241401FC00BFE8E3 /* Storyboards */,
 				D6126FB62412D36300BFE8E3 /* employee.json */,
 				D6126FA52412D2F800BFE8E3 /* Assets.xcassets */,
-				D6126FA72412D2F800BFE8E3 /* LaunchScreen.storyboard */,
 				D6126FAA2412D2F800BFE8E3 /* Info.plist */,
-				D6126FBE2413E54D00BFE8E3 /* EmployeeTableView.swift */,
 			);
 			path = VAStateBasedUIUpdates;
+			sourceTree = "<group>";
+		};
+		D6126FC12414012C00BFE8E3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D6126FBE2413E54D00BFE8E3 /* EmployeeTableView.swift */,
+				D6126FB22412D35C00BFE8E3 /* NoConnectionView.swift */,
+				D6126FB32412D35C00BFE8E3 /* SpinnerView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D6126FC22414015F00BFE8E3 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				D6126FBC2412DA2500BFE8E3 /* MemeberViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		D6126FC32414017300BFE8E3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D6126FBA2412D9E000BFE8E3 /* Members.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D6126FC42414018500BFE8E3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D6126FA02412D2F400BFE8E3 /* RootViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D6126FC52414019700BFE8E3 /* Network Layer */ = {
+			isa = PBXGroup;
+			children = (
+				D6126FB82412D82B00BFE8E3 /* NetworkWrapper.swift */,
+			);
+			name = "Network Layer";
+			sourceTree = "<group>";
+		};
+		D6126FC6241401D500BFE8E3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D6126FB02412D34F00BFE8E3 /* Utility.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D6126FC7241401FC00BFE8E3 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D6126FA22412D2F400BFE8E3 /* Main.storyboard */,
+				D6126FA72412D2F800BFE8E3 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
