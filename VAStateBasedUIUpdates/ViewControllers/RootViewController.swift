@@ -48,6 +48,10 @@ final class RootViewController: UIViewController {
         self.loadMembers()
     }
     
+    private func checkIfFirstLaunch() {
+        
+    }
+    
     private func loadMembers() {
         
         state = .loading(spinnerView: SpinnerView())
@@ -56,7 +60,17 @@ final class RootViewController: UIViewController {
             switch result {
             case .success(let memberResponse):
                 guard let members = memberResponse.results else { return }
-                self.state = .loaded(members: members, inView: EmployeeTableView(frame: .zero, style: .plain))
+                
+//                var filteredMembers: [Member] = []
+//                for member in members {
+//                    if member.isMale {
+//                        filteredMembers.append(member)
+//                    }
+//                }
+                
+                let filteredMembers = members.filteredMaleMembers
+                
+                self.state = .loaded(members: filteredMembers, inView: EmployeeTableView(frame: .zero, style: .plain))
             case .failure(let error):
                 self.state = .failed(retryView: NoConnectionView(retryAction: self.retry))
                 print("Error: \(String(describing:error.errorDescription))")
@@ -73,22 +87,71 @@ final class RootViewController: UIViewController {
 extension RootViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.members?.count ?? 0
+        //return self.members?.count ?? 0
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         guard let members = self.members else { return cell }
-        let member = members[indexPath.row] as Member
-        cell.textLabel?.text = member.fullName
+        
+        //let member = members[indexPath.row] as Member
+        guard let member = members.first else { return cell }
+        cell.textLabel?.text = Value(at: indexPath, from: member)?.title
+        
+//        if indexPath.row == 0 {
+//            cell.textLabel?.text = member.name?.first
+//        } else if indexPath.row == 1 {
+//            cell.textLabel?.text = member.name?.last
+//        } else if indexPath.row == 2 {
+//            cell.textLabel?.text = member.email
+//        } else if indexPath.row == 3 {
+//            cell.textLabel?.text = member.gender
+//        }
         
         return cell
     }
 }
 
 
+private enum Value {
+    case firstName(from: Member)
+    case lastName(from: Member)
+    case emailName(from: Member)
+    case genderName(from: Member)
+    
+    var title: String {
+        switch self {
+        case .firstName(let member):
+            return member.name?.first ?? ""
+        case .lastName(let member):
+            return member.name?.last ?? ""
+        case .emailName(let member):
+            return member.email ?? ""
+        case .genderName(let member):
+            return member.gender ?? ""
+        }
+    }
+}
 
-
+extension Value {
+    
+    init?(at indexPath: IndexPath, from member: Member) {
+        
+        switch indexPath.row {
+        case 0:
+            self = .firstName(from: member)
+        case 1:
+            self = .lastName(from: member)
+        case 2:
+            self = .emailName(from: member)
+        case 3:
+            self = .genderName(from: member)
+        default:
+            fatalError("Invalid index path")
+        }
+    }
+}
 
 

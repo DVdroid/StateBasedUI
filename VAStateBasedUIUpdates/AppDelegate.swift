@@ -12,6 +12,12 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    
+    private var hasSeenTutorial: Bool {
+        get { return UserDefaults.standard.bool(forKey: "has_seen_tutorial") }
+        set { UserDefaults.standard.set(newValue, forKey: "has_seen_tutorial") }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         guard let rootViewController = UIStoryboard.instantiateViewcontroller(ofType: RootViewController.self) as? RootViewController else {
@@ -27,6 +33,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+//    private func showTutorial() {
+//        guard !UserDefaults.standard.bool(forKey: "has_seen_tutorial") else { return }
+    
+//        //Logic to show tutorial
+//        UserDefaults.standard.set(true, forKey: "has_seen_tutorial")
+//    }
+    
+    private func showTutorial() {
+        guard !self.hasSeenTutorial else { return }
+        
+        //Logic to show tutorial
+        hasSeenTutorial = true
+    }
+    
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

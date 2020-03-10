@@ -49,6 +49,10 @@ struct Member: Codable {
     var picture: Picture?
     let dob: Dob?
     let location: Location?
+    
+    var isMale: Bool {
+        return self.gender == "male"
+    }
 }
 
 struct Name: Codable {

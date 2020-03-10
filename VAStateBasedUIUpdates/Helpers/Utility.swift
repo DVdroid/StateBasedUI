@@ -65,3 +65,14 @@ extension UIAlertController {
         parent.present(alertVC, animated: true, completion: nil)
     }
 }
+
+extension Collection where Element == Member {
+    
+    var filteredMaleMembers: [Member] {
+        return filter { $0.isMale }
+    }
+    
+    var filteredFemaleMembers: [Member] {
+        return filter { !$0.isMale }
+    }
+}
