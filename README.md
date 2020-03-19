@@ -40,7 +40,7 @@ List of features ready
 Project is: _in progress_
 
 ## Inspiration
-Done as a sample project.
+try! Swift Tokyo 2018 - Optimizing Swift code for separation of concerns and simplicity - https://www.youtube.com/watch?v=LKKnmr3GKFM
 
 ## Contact
 Created by [@DVdroid](anandin02@gmail.com) - feel free to contact me!
