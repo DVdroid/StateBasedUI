@@ -20,7 +20,7 @@ Idea of the project came from the talk https://www.youtube.com/watch?v=LKKnmr3GK
 ![No Connection Screen Light](./img/No_Connection_Screen_Light.png?raw=true "2. No Connection Screen Light")
 ![No Data Screen Light](./img/No_Data_Screen_Light.png?raw=true "3. No Data Screen Light")
 ![Home Screen Dark](./img/Home_Screen_Dark.png?raw=true "4. Home Screen Dark")
-![No Connection Screen Dark](./img/No_ConnectionS_creen_Dark.png?raw=true "5. No Connection Screen Dark")
+![No Connection Screen Dark](./img/No_Connection_Screen_Dark.png?raw=true "5. No Connection Screen Dark")
 ![No Data Screen Dark](./img/No_Data_Screen_Dark.png?raw=true "6. No Data Screen Dark")
 
 ## Technologies
