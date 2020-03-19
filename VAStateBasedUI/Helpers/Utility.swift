@@ -8,9 +8,9 @@
 
 import UIKit
 
-protocol AddableRemoveable {
-    func addAsSubView(inView superView: UIView)
-    func removeAsSubViewFromSuperView()
+protocol AddableRemoveable: UIView {
+    func addAsSubView(inView parentView: UIView)
+    func removeAsSubViewFromParentView()
 }
 
 extension UIColor {
@@ -40,31 +40,6 @@ func readDummyJSONResonse() -> Data? {
     return try! Data(contentsOf: jsonURL)
 }
 
-extension UIAlertController {
-    
-    class func showAlert(inParent parent: UIViewController,
-                         preferredStyle style: Style,
-                         withTitle title: String,
-                         alertMessage message: String,
-                         andAlertActions actions: [UIAlertAction]?) {
-        
-        let alertVC = UIAlertController(title: title,
-                                        message: message,
-                                        preferredStyle: style)
-        
-        if let alertActions = actions {
-            _ = alertActions.map{ alertVC.addAction($0) }
-        }
-        
-        parent.popoverPresentationController?.sourceView = parent.view
-        parent.popoverPresentationController?.sourceRect = CGRect(x: parent.view.bounds.width / 2.0,
-                                                                  y: parent.view.bounds.height / 2.0,
-                                                                  width: 1.0,
-                                                                  height: 1.0)
-        
-        parent.present(alertVC, animated: true, completion: nil)
-    }
-}
 
 extension Collection where Element == Member {
     
@@ -75,4 +50,11 @@ extension Collection where Element == Member {
     var filteredFemaleMembers: [Member] {
         return filter { !$0.isMale }
     }
+}
+
+
+func configure<T>(_ value: T, using closure: (inout T) throws -> Void) rethrows -> T {
+    var value = value
+    try closure(&value)
+    return value
 }

@@ -1,6 +1,6 @@
 //
 //  RootViewController.swift
-//  VAStateBasedUIUpdates
+//  VAStateBasedUI
 //
 //  Created by Vikash Anand on 07/03/20.
 //  Copyright © 2020 Vikash Anand. All rights reserved.
@@ -16,7 +16,8 @@ final class RootViewController: UIViewController {
     private enum State {
         case pending
         case loading(spinnerView: SpinnerView)
-        case failed(retryView: NoConnectionView)
+        case failedDueToNoConnection(retryView: NoConnectionView)
+        case failedDueToNoData(retryView: NoDataFoundView)
         case loaded(members: [Member], inView: EmployeeTableView)
     }
     
@@ -24,19 +25,37 @@ final class RootViewController: UIViewController {
         didSet {
             switch state {
             case .pending: visibleView = nil
-            case .loading(let spinner): visibleView = spinner
-            case .failed(let retryView): visibleView = retryView
+                
+            case .loading(let spinner):
+                isRefreshBarButtonItemEnabled = false
+                visibleView = spinner
+                
+            case .failedDueToNoConnection(let retryView):
+                visibleView = retryView
+                
+            case .failedDueToNoData(let retryView):
+                visibleView = retryView
+                
             case .loaded(let members, let employeeTableView):
-                employeeTableView.dataSource = self
+                isRefreshBarButtonItemEnabled = true
                 visibleView = employeeTableView
+                employeeTableView.dataSource = self
                 self.members = members
                 employeeTableView.reloadData()
             }
         }
     }
     
+    /* Property to Abstract the logic to enable/disable 'self.navigationItem.rightBarButtonItem' */
+    var isRefreshBarButtonItemEnabled: Bool = false {
+        didSet {
+            self.navigationItem.rightBarButtonItem?.isEnabled = isRefreshBarButtonItemEnabled
+        }
+    }
+    
+    /* Property to Abstract the logic to add/remove various subviews of self.view */
     var visibleView: AddableRemoveable? {
-        willSet { visibleView?.removeAsSubViewFromSuperView() }
+        willSet { visibleView?.removeAsSubViewFromParentView() }
         didSet { if let visibleView = visibleView { visibleView.addAsSubView(inView : view) } }
     }
     
@@ -45,11 +64,11 @@ final class RootViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         self.title = "Members"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reload",
+                                                                 style: .done,
+                                                                 target: self,
+                                                                 action: #selector(self.reload))
         self.loadMembers()
-    }
-    
-    private func checkIfFirstLaunch() {
-        
     }
     
     private func loadMembers() {
@@ -60,24 +79,29 @@ final class RootViewController: UIViewController {
             switch result {
             case .success(let memberResponse):
                 guard let members = memberResponse.results else { return }
-                
-//                var filteredMembers: [Member] = []
-//                for member in members {
-//                    if member.isMale {
-//                        filteredMembers.append(member)
-//                    }
-//                }
-                
                 let filteredMembers = members.filteredMaleMembers
+
+                self.state = .loaded(members: filteredMembers,
+                                     inView: EmployeeTableView(frame: .zero, style: .plain))
                 
-                self.state = .loaded(members: filteredMembers, inView: EmployeeTableView(frame: .zero, style: .plain))
             case .failure(let error):
-                self.state = .failed(retryView: NoConnectionView(retryAction: self.retry))
-                print("Error: \(String(describing:error.errorDescription))")
+                switch error {
+                case .noInternet:
+                    let noConnectionView = NoConnectionView(retryAction: self.retry)
+                    self.state = .failedDueToNoConnection(retryView: noConnectionView)
+                case .noRecords, .badResponse:
+                    let noDataFoundView = NoDataFoundView(retryAction: self.retry)
+                    self.state = .failedDueToNoData(retryView: noDataFoundView)
+                default:
+                    print("Error: \(String(describing:error.errorDescription))")
+                }
             }
         }
     }
     
+    @objc private func reload() {
+        self.loadMembers()
+    }
     
     @objc private func retry() {
         loadMembers()
@@ -87,28 +111,14 @@ final class RootViewController: UIViewController {
 extension RootViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return self.members?.count ?? 0
         return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         guard let members = self.members else { return cell }
-        
-        //let member = members[indexPath.row] as Member
         guard let member = members.first else { return cell }
         cell.textLabel?.text = Value(at: indexPath, from: member)?.title
-        
-//        if indexPath.row == 0 {
-//            cell.textLabel?.text = member.name?.first
-//        } else if indexPath.row == 1 {
-//            cell.textLabel?.text = member.name?.last
-//        } else if indexPath.row == 2 {
-//            cell.textLabel?.text = member.email
-//        } else if indexPath.row == 3 {
-//            cell.textLabel?.text = member.gender
-//        }
         
         return cell
     }

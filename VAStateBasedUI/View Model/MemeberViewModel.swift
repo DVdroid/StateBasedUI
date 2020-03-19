@@ -8,22 +8,22 @@
 
 import Foundation
 
-protocol MemberFetchable {
-    func fetchMembers<T: Decodable>(result: @escaping (Result<T, DataFetchError>) -> Void)
+protocol DataFetchable {
+    func fetchData<T: Decodable>(result: @escaping (Result<T, DataFetchError>) -> Void)
 }
 
 final class MemeberViewModel {
     
     // MARK: - Variables
     private var memberResponse: MemberResponse?
-    let dataSource: MemberFetchable
+    let dataSource: DataFetchable
     
-    init(_ dataSource: MemberFetchable) {
+    init(_ dataSource: DataFetchable) {
         self.dataSource = dataSource
     }
     
     func getMembers<T: Decodable>(result: @escaping (Result<T, DataFetchError>) -> Void) {
-        dataSource.fetchMembers(result: result)
+        dataSource.fetchData(result: result)
     }
 }
 

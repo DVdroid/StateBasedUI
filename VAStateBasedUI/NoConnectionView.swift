@@ -8,28 +8,24 @@
 
 import UIKit
 
-class NoConnectionView: UIView {
+final class NoConnectionView: UIView {
     
     var retryAction: (() -> Void)
     
-    lazy var noConnectionImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "No_Connection")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
+    lazy var noConnectionImageView = configure(UIImageView()) {
+        $0.image = UIImage(named: "No_Connection")
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.contentMode = .scaleAspectFit
+    }
     
-    private lazy var button: UIButton = {
-        let button = UIButton()
-        button.layer.borderColor = UIColor.cyan.cgColor
-        button.layer.borderWidth = 2.0
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Retry", for: .normal)
-        button.setTitleColor(UIColor.darkGray, for: .normal)
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        return button
-    }()
+    private lazy var button = configure(UIButton()) {
+        $0.layer.borderColor = UIColor.cyan.cgColor
+        $0.layer.borderWidth = 2.0
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.setTitle("Retry", for: .normal)
+        $0.setTitleColor(UIColor.darkGray, for: .normal)
+        $0.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    }
     
     init(retryAction: @escaping (() -> Void)) {
         self.retryAction = retryAction
@@ -66,16 +62,16 @@ class NoConnectionView: UIView {
         self.retryAction()
     }
     
-    func showNoConnectionView(onView : UIView) {
+    func showNoConnectionView(inView : UIView) {
         
         if self.superview == nil {
             self.translatesAutoresizingMaskIntoConstraints = false
-            onView.addSubview(self)
+            inView.addSubview(self)
             NSLayoutConstraint.activate([
-                self.topAnchor.constraint(equalTo: onView.safeAreaLayoutGuide.topAnchor),
-                self.leadingAnchor.constraint(equalTo: onView.leadingAnchor),
-                onView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-                onView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+                self.topAnchor.constraint(equalTo: inView.safeAreaLayoutGuide.topAnchor),
+                self.leadingAnchor.constraint(equalTo: inView.leadingAnchor),
+                inView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+                inView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor)
             ])
         }
     }
@@ -90,10 +86,10 @@ class NoConnectionView: UIView {
 extension NoConnectionView: AddableRemoveable {
     
     func addAsSubView(inView parentView: UIView) {
-        self.showNoConnectionView(onView: parentView)
+        self.showNoConnectionView(inView: parentView)
     }
     
-    func removeAsSubViewFromSuperView() {
+    func removeAsSubViewFromParentView() {
         self.removeNoConnectionView()
     }
 }

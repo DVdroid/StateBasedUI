@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12E1A8222422A522006E4C3E /* NoDataFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E1A8212422A522006E4C3E /* NoDataFoundView.swift */; };
 		D6126F9D2412D2F400BFE8E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6126F9C2412D2F400BFE8E3 /* AppDelegate.swift */; };
 		D6126FA12412D2F400BFE8E3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6126FA02412D2F400BFE8E3 /* RootViewController.swift */; };
 		D6126FA42412D2F400BFE8E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6126FA22412D2F400BFE8E3 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12E1A8212422A522006E4C3E /* NoDataFoundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDataFoundView.swift; sourceTree = "<group>"; };
 		D6126F992412D2F400BFE8E3 /* VAStateBasedUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VAStateBasedUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6126F9C2412D2F400BFE8E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6126FA02412D2F400BFE8E3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				D6126FBE2413E54D00BFE8E3 /* EmployeeTableView.swift */,
 				D6126FB22412D35C00BFE8E3 /* NoConnectionView.swift */,
 				D6126FB32412D35C00BFE8E3 /* SpinnerView.swift */,
+				12E1A8212422A522006E4C3E /* NoDataFoundView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -147,9 +150,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D6126F982412D2F400BFE8E3 /* VAStateBasedUIUpdates */ = {
+		D6126F982412D2F400BFE8E3 /* VAStateBasedUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D6126FAD2412D2F800BFE8E3 /* Build configuration list for PBXNativeTarget "VAStateBasedUIUpdates" */;
+			buildConfigurationList = D6126FAD2412D2F800BFE8E3 /* Build configuration list for PBXNativeTarget "VAStateBasedUI" */;
 			buildPhases = (
 				D6126F952412D2F400BFE8E3 /* Sources */,
 				D6126F962412D2F400BFE8E3 /* Frameworks */,
@@ -159,7 +162,7 @@
 			);
 			dependencies = (
 			);
-			name = VAStateBasedUIUpdates;
+			name = VAStateBasedUI;
 			productName = VAStateBasedUIUpdates;
 			productReference = D6126F992412D2F400BFE8E3 /* VAStateBasedUI.app */;
 			productType = "com.apple.product-type.application";
@@ -192,7 +195,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D6126F982412D2F400BFE8E3 /* VAStateBasedUIUpdates */,
+				D6126F982412D2F400BFE8E3 /* VAStateBasedUI */,
 			);
 		};
 /* End PBXProject section */
@@ -218,6 +221,7 @@
 			files = (
 				D6126FBB2412D9E000BFE8E3 /* Members.swift in Sources */,
 				D6126FA12412D2F400BFE8E3 /* RootViewController.swift in Sources */,
+				12E1A8222422A522006E4C3E /* NoDataFoundView.swift in Sources */,
 				D6126FBF2413E54D00BFE8E3 /* EmployeeTableView.swift in Sources */,
 				D6126FB52412D35C00BFE8E3 /* SpinnerView.swift in Sources */,
 				D6126FB42412D35C00BFE8E3 /* NoConnectionView.swift in Sources */,
@@ -300,7 +304,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -354,7 +358,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -371,6 +375,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6LN4XWA2V;
 				INFOPLIST_FILE = VAStateBasedUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -389,6 +394,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6LN4XWA2V;
 				INFOPLIST_FILE = VAStateBasedUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -412,7 +418,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D6126FAD2412D2F800BFE8E3 /* Build configuration list for PBXNativeTarget "VAStateBasedUIUpdates" */ = {
+		D6126FAD2412D2F800BFE8E3 /* Build configuration list for PBXNativeTarget "VAStateBasedUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6126FAE2412D2F800BFE8E3 /* Debug */,

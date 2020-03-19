@@ -8,40 +8,25 @@
 
 import UIKit
 
-class SpinnerView: UIView {
+final class SpinnerView: UIView {
     
-    private lazy var container: UIView = {
-        var container: UIView = UIView()
-        container.backgroundColor = UIColor.colorFromHex(rgbValue:0xffffff, alpha: 0.5)
-        container.translatesAutoresizingMaskIntoConstraints = false
-        return container
-    }()
+    private lazy var container = configure(UIView()) {
+        $0.backgroundColor = UIColor.colorFromHex(rgbValue:0xffffff, alpha: 0.5)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
-    private lazy var loadingView: UIView = {
-        var loadingView: UIView = UIView()
-        loadingView.backgroundColor = UIColor.colorFromHex(rgbValue:0x444444, alpha: 0.7)
-        loadingView.clipsToBounds = true
-        loadingView.layer.cornerRadius = 10
-        loadingView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return loadingView
-    }()
+    private lazy var loadingView = configure(UIView()) {
+        $0.backgroundColor = UIColor.colorFromHex(rgbValue:0x444444, alpha: 0.7)
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-        
-        if #available(iOS 13, *) {
-            activityIndicator.style =
-            UIActivityIndicatorView.Style.large
-        } else {
-            activityIndicator.style =
-            UIActivityIndicatorView.Style.medium
-        }
-        
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        return activityIndicator
-    }()
+    private lazy var activityIndicator = configure(UIActivityIndicatorView()) {
+        $0.style = UIActivityIndicatorView.Style.whiteLarge
+        $0.hidesWhenStopped = true
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -82,14 +67,14 @@ class SpinnerView: UIView {
         ])
     }
     
-    func showSpinner(onView : UIView) {
+    func showSpinner(inView : UIView) {
         self.translatesAutoresizingMaskIntoConstraints = false
-        onView.addSubview(self)
+        inView.addSubview(self)
         NSLayoutConstraint.activate([
-                   self.topAnchor.constraint(equalTo: onView.safeAreaLayoutGuide.topAnchor),
-                   self.leadingAnchor.constraint(equalTo: onView.leadingAnchor),
-                   onView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-                   onView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+                   self.topAnchor.constraint(equalTo: inView.safeAreaLayoutGuide.topAnchor),
+                   self.leadingAnchor.constraint(equalTo: inView.leadingAnchor),
+                   inView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+                   inView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor)
                ])
     }
     
@@ -104,10 +89,10 @@ class SpinnerView: UIView {
 extension SpinnerView: AddableRemoveable {
     
     func addAsSubView(inView parentView: UIView) {
-        self.showSpinner(onView: parentView)
+        self.showSpinner(inView: parentView)
     }
     
-    func removeAsSubViewFromSuperView() {
+    func removeAsSubViewFromParentView() {
         self.removeSpinner()
     }
 }

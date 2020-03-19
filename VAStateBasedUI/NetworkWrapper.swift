@@ -6,8 +6,6 @@
 //  Copyright © 2020 Vikash Anand. All rights reserved.
 //
 
-
-import Foundation
 import UIKit
 
 protocol URLSessionProtocol {
@@ -51,13 +49,13 @@ extension DataFetchError: LocalizedError {
 }
 
 
-final class NetworkFetcher: MemberFetchable {
+final class NetworkFetcher: DataFetchable {
     
     private var members: [Member]?
     private var memberResponse: MemberResponse?
     private static let memberUrlString = "https://randomuser.me/api/?results=20"
     
-    func fetchMembers<T: Decodable>(result: @escaping (Result<T, DataFetchError>) -> Void) {
+    func fetchData<T: Decodable>(result: @escaping (Result<T, DataFetchError>) -> Void) {
         guard let memberURL = URL(string: type(of: self).memberUrlString) else { return }
         NetworkWrapper.sharedInstance.makeNetworkRequest(url: memberURL, modelResponse: T.self, result: result)
     }
@@ -76,22 +74,30 @@ final class NetworkWrapper {
     {
         DispatchQueue.global(qos: .background).async {
             
-            let content = Int.random(in: 1...4) % 2 == 0 ? readDummyJSONResonse()! : Data()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            //To simulate no network connection
+            if Int.random(in: 1...4) % 2 == 0 {
+                DispatchQueue.main.async {
+                    result(.failure(DataFetchError.noInternet))
+                }
+            } else {
                 
-                do {
-                    let decoder = JSONDecoder()
-                    let myNewObject = try decoder.decode(T.self, from: content)
-                    debugPrint(myNewObject)
-                    result(.success(myNewObject))
-                } catch { let error = error as NSError
-                    debugPrint(error.userInfo.debugDescription)
-                    debugPrint(DataFetchError.badResponse.errorDescription!)
-                    result(.failure(DataFetchError.badResponse))
-                    return
+                //To simulate incorrct json format
+                let content = Int.random(in: 1...4) % 2 == 0 ? readDummyJSONResonse()! : Data()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+                    
+                    do {
+                        let decoder = JSONDecoder()
+                        let myNewObject = try decoder.decode(T.self, from: content)
+                        result(.success(myNewObject))
+                    } catch { let error = error as NSError
+                        debugPrint(error.userInfo.debugDescription)
+                        debugPrint(DataFetchError.badResponse.errorDescription!)
+                        result(.failure(DataFetchError.badResponse))
+                        return
+                    }
                 }
             }
-            
         }
     }
 }
+
