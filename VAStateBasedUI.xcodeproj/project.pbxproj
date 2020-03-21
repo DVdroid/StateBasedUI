@@ -22,6 +22,7 @@
 		D6126FBD2412DA2600BFE8E3 /* MemeberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6126FBC2412DA2500BFE8E3 /* MemeberViewModel.swift */; };
 		D6126FBF2413E54D00BFE8E3 /* EmployeeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6126FBE2413E54D00BFE8E3 /* EmployeeTableView.swift */; };
 		D6BC1C0A242691B300CF6186 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC1C09242691B300CF6186 /* Request.swift */; };
+		D6BC1C0C24269E8500CF6186 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BC1C0B24269E8500CF6186 /* EndPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		D6126FBC2412DA2500BFE8E3 /* MemeberViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeberViewModel.swift; sourceTree = "<group>"; };
 		D6126FBE2413E54D00BFE8E3 /* EmployeeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableView.swift; sourceTree = "<group>"; };
 		D6BC1C09242691B300CF6186 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		D6BC1C0B24269E8500CF6186 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		D6126FC52414019700BFE8E3 /* Network Layer */ = {
 			isa = PBXGroup;
 			children = (
+				D6BC1C0B24269E8500CF6186 /* EndPoint.swift */,
 				D6BC1C09242691B300CF6186 /* Request.swift */,
 				D6126FB82412D82B00BFE8E3 /* NetworkWrapper.swift */,
 			);
@@ -228,6 +231,7 @@
 				D6126FBF2413E54D00BFE8E3 /* EmployeeTableView.swift in Sources */,
 				D6BC1C0A242691B300CF6186 /* Request.swift in Sources */,
 				D6126FB52412D35C00BFE8E3 /* SpinnerView.swift in Sources */,
+				D6BC1C0C24269E8500CF6186 /* EndPoint.swift in Sources */,
 				D6126FB42412D35C00BFE8E3 /* NoConnectionView.swift in Sources */,
 				D6126F9D2412D2F400BFE8E3 /* AppDelegate.swift in Sources */,
 				D6126FBD2412DA2600BFE8E3 /* MemeberViewModel.swift in Sources */,

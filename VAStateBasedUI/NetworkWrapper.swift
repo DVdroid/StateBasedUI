@@ -53,11 +53,11 @@ final class NetworkFetcher: DataFetchable {
     
     private var members: [Member]?
     private var memberResponse: MemberResponse?
-    private static let memberUrlString = "https://randomuser.me/api/?results=20"
-    
+
     func fetchData<T: Decodable>(result: @escaping (Result<T, DataFetchError>) -> Void) {
-        guard let memberURL = URL(string: type(of: self).memberUrlString) else { return }
-        NetworkWrapper.sharedInstance.makeNetworkRequest(url: memberURL, modelResponse: T.self, result: result)
+        NetworkWrapper.sharedInstance.makeNetworkRequest(endPoint: EndPoint(path: "/api/?results=20"),
+                                                                   modelResponse: T.self,
+                                                                          result: result)
     }
 }
 
@@ -67,7 +67,7 @@ final class NetworkWrapper {
     static let sharedInstance = NetworkWrapper()
     private init(){}
     
-    func makeNetworkRequest<T: Decodable>(url: URL,
+    func makeNetworkRequest<T: Decodable>(endPoint: EndPoint,
                                           using session: URLSessionProtocol = URLSession.shared,
                                           modelResponse: T.Type,
                                           result: @escaping (Result<T, DataFetchError>) -> Void)
