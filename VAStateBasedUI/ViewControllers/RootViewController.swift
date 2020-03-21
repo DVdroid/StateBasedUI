@@ -116,8 +116,7 @@ extension RootViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        guard let members = self.members else { return cell }
-        guard let member = members.first else { return cell }
+        guard let members = self.members, let member = members.first else { return cell }
         cell.textLabel?.text = Value(at: indexPath, from: member)?.title
         
         return cell
