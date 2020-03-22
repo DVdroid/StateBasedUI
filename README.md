@@ -29,7 +29,7 @@ Idea of the project came from the talk https://www.youtube.com/watch?v=LKKnmr3GK
 * Language - Swift 5.0 
 
 ## Setup
-Ceckout the repository and open it in Xocde. Build and run in xcode.
+Checkout the repository and open it in Xocde. Build and run in xcode.
 
 ## Features
 List of features ready 
