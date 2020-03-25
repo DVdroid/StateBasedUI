@@ -58,3 +58,14 @@ func configure<T>(_ value: T, using closure: (inout T) throws -> Void) rethrows 
     try closure(&value)
     return value
 }
+
+extension Optional where Wrapped: Collection {
+    public var isNilOrEmpty: Bool {
+        switch self {
+        case .none:
+            return true
+        case .some(let collection):
+            return collection.isEmpty
+        }
+    }
+}
